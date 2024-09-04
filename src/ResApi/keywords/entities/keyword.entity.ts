@@ -1,19 +1,12 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 @Entity()
-
-export class User {
+export class Keyword {
     @PrimaryGeneratedColumn()
     id: number;
 
     @Column()
-    userName: string;
+    text: string;
 
     @Column()
-    passWord: string;
-    
-    @Column()
-    conFirmPassWord: string;
-
-    @Column()
-    gmail: string;
+    href: string;
 }

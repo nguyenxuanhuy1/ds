@@ -1,19 +1,16 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
-@Entity()
 
-export class User {
+@Entity()
+export class Menu {
     @PrimaryGeneratedColumn()
     id: number;
 
     @Column()
-    userName: string;
+    icon: string;
 
     @Column()
-    passWord: string;
-    
-    @Column()
-    conFirmPassWord: string;
+    text: string;
 
     @Column()
-    gmail: string;
+    href: string;
 }
