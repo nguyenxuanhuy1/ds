@@ -10,7 +10,7 @@ export class KeywordsService {
     @InjectRepository(Keyword)
     private Repository: Repository<Keyword>,
   ) {}
-async getMenuList(): Promise<{ list: CreateKeywordDto[] }> {
+async getKeywordList(): Promise<{ list: CreateKeywordDto[] }> {
     const keywordEntities = await this.Repository.find();
 
     const list: CreateKeywordDto[] = keywordEntities.map(keyword => ({

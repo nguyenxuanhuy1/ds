@@ -10,6 +10,6 @@ export class SlideController {
 
   @Get()
   async getMenuList(): Promise<{ list: CreateSlideDto[] }> {
-    return this.slideService.getMenuList();
+    return this.slideService.getSlideList();
   }
 }

@@ -11,9 +11,8 @@ export class SlideService {
         @InjectRepository(Slide)
         private Repository: Repository<Slide>,
       ) {}
-    async getMenuList(): Promise<{ list: CreateSlideDto[] }> {
+    async getSlideList(): Promise<{ list: CreateSlideDto[] }> {
         const sileEntities = await this.Repository.find();
-    
         const list: CreateSlideDto[] = sileEntities.map(slide => ({
         image:slide.image,
           href: slide.href,

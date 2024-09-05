@@ -9,6 +9,6 @@ export class KeywordsController {
 
   @Get()
   async getMenuList(): Promise<{ list: CreateKeywordDto[] }> {
-    return this.keywordsService.getMenuList();
+    return this.keywordsService.getKeywordList();
   }
 }
