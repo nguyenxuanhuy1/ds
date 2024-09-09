@@ -1,17 +1,19 @@
-import { ApiProperty } from "@nestjs/swagger";
+import { ApiProperty } from '@nestjs/swagger';
+import { IsNotEmpty, IsString, MinLength } from 'class-validator';
 export class CreateUserDto {
-    @ApiProperty()
-    id: number;
+  @ApiProperty()
+  @IsString()
+  @MinLength(6, { message: 'Yêu cầu nhập >=6 kí tự' })
+  @IsNotEmpty({ message: 'Tài khoản không được để trống' })
+  username: string;
 
-    @ApiProperty()
-    userName: string;
+  @ApiProperty()
+  @IsString()
+  @MinLength(6, { message: 'Yêu cầu nhập >=6 kí tự' })
+  @IsNotEmpty({ message: 'Tài khoản không được để trống' })
+  password: string;
 
-    @ApiProperty()
-    passWord: string;
-    
-    @ApiProperty()
-    conFirmPassWord: string;
-
-    @ApiProperty()
-    gmail: string;
+  @ApiProperty()
+  @MinLength(6, { message: 'Yêu cầu nhập >=6 kí tự' })
+  gmail: string;
 }

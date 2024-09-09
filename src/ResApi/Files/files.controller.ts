@@ -15,9 +15,9 @@ import { Response } from 'express';
 import { ApiTags } from '@nestjs/swagger';
 import * as fs from 'fs';
 @ApiTags('Api-Files')
-@Controller()
+@Controller('files')
 export class FilesController {
-  @Post('files')
+  @Post()
   @UseInterceptors(
     FileInterceptor('file', {
       storage: diskStorage({
@@ -33,10 +33,8 @@ export class FilesController {
               null,
             );
           }
-          const now = new Date();
-          const hours = now.getHours().toString().padStart(2, '0');
-          const seconds = now.getSeconds().toString().padStart(2, '0');
-          const timeString = `${seconds}`;
+
+          const timeString = `${Date.now().toString(36)}`;
           const newFileName = `${timeString}${fileExtName}`;
 
           cb(null, newFileName);
@@ -49,7 +47,6 @@ export class FilesController {
     if (!file) {
       throw new BadRequestException('Tên tệp bị thiếu hoặc không hợp lệ');
     }
-    console.log(file);
     return file;
   }
 
