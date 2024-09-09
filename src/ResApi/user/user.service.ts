@@ -10,17 +10,25 @@ export class UserService {
     @InjectRepository(User)
     private Repository: Repository<User>,
   ) {}
-  async createUser(createUserDto: CreateUserDto): Promise<User> {
-    const { username, password } = createUserDto;
 
-    const existingUser = await this.Repository.findOne({
-      where: { username },
-    });
-    if (existingUser) {
-      throw new BadRequestException('Tài khảon đã tồn tại!');
+  async create(createUserDto: CreateUserDto): Promise<User> {
+    const { username, password, gmail } = createUserDto;
+    const user = new User();
+    user.username = username;
+    user.password = password;
+    if (gmail) {
+      user.gmail = gmail;
     }
 
-    const newUser = this.Repository.create(createUserDto);
-    return await this.Repository.save(newUser);
+    return await this.Repository.save(user);
+  }
+  async findOneByUsername(username: string): Promise<User | null> {
+    return await this.Repository.findOne({
+      where: { username: username },
+    });
+  }
+
+  async findUsernameAndPass(condition: any): Promise<User> {
+    return this.Repository.findOne(condition);
   }
 }

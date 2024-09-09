@@ -15,5 +15,5 @@ export class CreateUserDto {
 
   @ApiProperty()
   @MinLength(6, { message: 'Yêu cầu nhập >=6 kí tự' })
-  gmail: string;
+  gmail?: string;
 }

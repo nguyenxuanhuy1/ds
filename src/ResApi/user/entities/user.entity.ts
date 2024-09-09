@@ -21,6 +21,9 @@ export class User {
   @Column()
   password: string;
 
+  @Column()
+  gmail: string;
+
   @Column({ type: 'enum', enum: ['customer', 'admin'], default: 'customer' })
   role: string;
 
