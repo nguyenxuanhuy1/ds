@@ -80,10 +80,24 @@ export class UserController {
       throw new BadRequestException('Tài khoản hoặc mật khẩu sai');
     }
 
-    const jwt = await this.jwtService.signAsync({ userId: user.userId });
-    respone.cookie('jwt', jwt, { httpOnly: true });
+    const jwt = await this.jwtService.signAsync(
+      { userId: user.userId },
+      { expiresIn: '30s' },
+    );
+    respone.cookie('jwt', jwt, {
+      httpOnly: true,
+      // secure: process.env.NODE_ENV === 'production',
+      maxAge: 30 * 1000,
+    });
     return {
-      message: 'Success',
+      user: {
+        id: user.userId,
+        username: user.username,
+        email: user.gmail,
+        roles: user.role,
+      },
+      // token: jwt,
+      // message: 'Đăng nhập thành công',
     };
   }
 
