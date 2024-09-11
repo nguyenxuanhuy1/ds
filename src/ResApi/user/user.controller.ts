@@ -90,14 +90,7 @@ export class UserController {
       maxAge: 30 * 1000,
     });
     return {
-      user: {
-        id: user.userId,
-        username: user.username,
-        email: user.gmail,
-        roles: user.role,
-      },
-      // token: jwt,
-      // message: 'Đăng nhập thành công',
+      acessToken: jwt,
     };
   }
 

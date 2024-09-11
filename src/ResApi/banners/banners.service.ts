@@ -10,9 +10,28 @@ export class BannersService {
     @InjectRepository(Banner)
     private Repository: Repository<Banner>,
   ) {}
+  // async getBannerList(): Promise<{ list: CreateBannerDto[] }> {
+  //   const bannerEntities = await this.Repository.find();
+  //   const list: CreateBannerDto[] = bannerEntities.map((banner) => {
+  //     const bannerDto: CreateBannerDto = {
+  //       image: banner.image,
+  //       href: banner.href,
+  //     };
+  //     if (banner.openInNewTab === true) {
+  //       bannerDto.openInNewTab = banner.openInNewTab;
+  //     }
+  //     return bannerDto;
+  //   });
+
+  //   return { list };
+  // }
+  async createBanner(createBannerDto: CreateBannerDto): Promise<Banner> {
+    const banner = this.Repository.create(createBannerDto);
+    return this.Repository.save(banner);
+  }
   async getBannerList(): Promise<{ list: CreateBannerDto[] }> {
     const bannerEntities = await this.Repository.find();
-    const list: CreateBannerDto[] = bannerEntities.map(banner => {
+    const list: CreateBannerDto[] = bannerEntities.map((banner) => {
       const bannerDto: CreateBannerDto = {
         image: banner.image,
         href: banner.href,
@@ -22,7 +41,7 @@ export class BannersService {
       }
       return bannerDto;
     });
-  
+
     return { list };
   }
 }
