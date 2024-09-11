@@ -22,6 +22,16 @@ import { Coupon } from './ResApi/coupon/entities/coupon.entity';
 import { CartModule } from './ResApi/cart/cart.module';
 import { CartItemModule } from './ResApi/cart-item/cart-item.module';
 import { CouponModule } from './ResApi/coupon/coupon.module';
+import { Slide } from './ResApi/slide/entities/slide.entity';
+import { Banner } from './ResApi/banners/entities/banner.entity';
+import { News } from './ResApi/news/entities/news.entity';
+import { SlideModule } from './ResApi/slide/slide.module';
+import { BannersModule } from './ResApi/banners/banners.module';
+import { NewsModule } from './ResApi/news/news.module';
+import { Menu } from './ResApi/menu/entities/menu.entity';
+import { MenuModule } from './ResApi/menu/menu.module';
+import { Keyword } from './ResApi/keywords/entities/keyword.entity';
+import { KeywordsModule } from './ResApi/keywords/keywords.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -41,6 +51,11 @@ import { CouponModule } from './ResApi/coupon/coupon.module';
         Cart,
         CartItem,
         Coupon,
+        Slide,
+        Banner,
+        News,
+        Menu,
+        Keyword,
       ],
       synchronize: true,
     }),
@@ -55,6 +70,11 @@ import { CouponModule } from './ResApi/coupon/coupon.module';
     CartModule,
     CartItemModule,
     CouponModule,
+    SlideModule,
+    BannersModule,
+    NewsModule,
+    MenuModule,
+    KeywordsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
