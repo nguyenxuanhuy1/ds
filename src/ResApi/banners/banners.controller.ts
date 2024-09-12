@@ -41,13 +41,10 @@ export class BannersController {
     if (!file) {
       throw new BadRequestException('File không được tải lên');
     }
-
-    // Sử dụng FileUploadService để lấy đường dẫn file đã upload
     const imagePath = this.fileUploadService.getFileUrl(file, '/public/upload');
 
-    // Gán đường dẫn file vừa upload cho cả thuộc tính image và href
     createBannerDto.image = imagePath;
-    createBannerDto.href = imagePath; // Tự động lấy đường dẫn của ảnh để làm giá trị href
+    createBannerDto.href = imagePath;
 
     // Lưu thông tin banner vào cơ sở dữ liệu
     return this.bannersService.createBanner(createBannerDto);
