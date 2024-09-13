@@ -1,19 +1,27 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsString, MinLength } from 'class-validator';
-export class CreateUserDto {
+import {
+  IsEmail,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  MinLength,
+} from 'class-validator';
+export class BaseUserDto {
   @ApiProperty()
   @IsString()
-  @MinLength(6, { message: 'Yêu cầu nhập >=6 kí tự' })
-  @IsNotEmpty({ message: 'Tài khoản không được để trống' })
+  @MinLength(6, { message: 'Tài khoản yêu cầu nhập >=6 kí tự' })
+  @IsNotEmpty({ message: 'Tài khoản đang để trống' })
   username: string;
 
   @ApiProperty()
   @IsString()
-  @MinLength(6, { message: 'Yêu cầu nhập >=6 kí tự' })
-  @IsNotEmpty({ message: 'Tài khoản không được để trống' })
+  @MinLength(6, { message: 'Mật khẩu yêu cầu nhập >=6 kí tự' })
+  @IsNotEmpty({ message: 'Tài khoản không đúng' })
   password: string;
-
-  @ApiProperty()
-  @MinLength(6, { message: 'Yêu cầu nhập >=6 kí tự' })
+}
+export class CreateUserDto extends BaseUserDto {
+  @ApiProperty({ required: false })
+  @IsEmail({}, { message: 'Yêu cầu nhập địa chỉ email hợp lệ' })
+  @IsOptional()
   gmail?: string;
 }
