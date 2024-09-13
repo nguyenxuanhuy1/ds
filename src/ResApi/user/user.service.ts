@@ -20,7 +20,6 @@ export class UserService {
   async register(createUserDto: CreateUserDto): Promise<User> {
     const { username, password, gmail } = createUserDto;
 
-    // Kiểm tra username đã tồn tại chưa
     const checktrung = await this.findOneByUsername(username);
     if (checktrung) {
       throw new BadRequestException('Tài khoản đã tồn tại');
@@ -44,16 +43,13 @@ export class UserService {
     const user = await this.validateUser(username, password);
 
     if (!user) {
-      throw new UnauthorizedException('Tài khoản hoặc mật khẩu sai');
+      throw new BadRequestException('Tài khoản hoặc mật khẩu sai');
     }
-
-    // Tạo JWT
     const accessToken = await this.jwtService.signAsync(
       { userId: user.userId },
       { expiresIn: '1h' },
     );
 
-    // Thiết lập cookie cho JWT
     const cookieOptions = {
       httpOnly: true,
       maxAge: 60 * 60 * 1000, // 1 giờ
@@ -62,7 +58,6 @@ export class UserService {
 
     return { accessToken, cookieOptions };
   }
-
   async getUserFromToken(token: string): Promise<any> {
     try {
       if (!token) {
