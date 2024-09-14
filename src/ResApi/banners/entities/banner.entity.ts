@@ -5,6 +5,9 @@ export class Banner {
   id: number;
 
   @Column()
+  slug: string;
+
+  @Column()
   image: string;
 
   @Column()

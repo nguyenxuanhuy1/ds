@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './ResApi/user/user.module';
 import { User } from './ResApi/user/entities/user.entity';
@@ -34,30 +35,37 @@ import { Keyword } from './ResApi/keywords/entities/keyword.entity';
 import { KeywordsModule } from './ResApi/keywords/keywords.module';
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'postgres',
-      password: '123456',
-      database: 'Dvine',
-      entities: [
-        User,
-        Product,
-        Category,
-        Order,
-        OrderItem,
-        ProductKey,
-        Cart,
-        CartItem,
-        Coupon,
-        Slide,
-        Banner,
-        News,
-        Menu,
-        Keyword,
-      ],
-      synchronize: true,
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => ({
+        type: 'postgres',
+        host: configService.get<string>('DB_HOST'),
+        port: configService.get<number>('DB_PORT'),
+        username: configService.get<string>('DB_USERNAME'),
+        password: configService.get<string>('DB_PASSWORD'),
+        database: configService.get<string>('DB_NAME'),
+        entities: [
+          User,
+          Product,
+          Category,
+          Order,
+          OrderItem,
+          ProductKey,
+          Cart,
+          CartItem,
+          Coupon,
+          Slide,
+          Banner,
+          News,
+          Menu,
+          Keyword,
+        ],
+        synchronize: true,
+      }),
     }),
     FilesModule,
     MulterModule.register({ dest: './public/upload' }),

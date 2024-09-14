@@ -5,16 +5,13 @@ import { MulterOptions } from '@nestjs/platform-express/multer/interfaces/multer
 
 @Injectable()
 export class FileUploadService {
-  // Cấu hình Multer để lưu trữ file và kiểm tra định dạng file
   getMulterOptions(destination: string): MulterOptions {
     return {
       storage: diskStorage({
-        destination, // Thư mục đích để lưu file
+        destination,
         filename: (req, file, cb) => {
           const fileExtName = extname(file.originalname).toLowerCase();
           const allowedExtensions = ['.png', '.jpg', '.jpeg'];
-
-          // Kiểm tra định dạng file
           if (!allowedExtensions.includes(fileExtName)) {
             return cb(
               new BadRequestException(
@@ -23,9 +20,9 @@ export class FileUploadService {
               null,
             );
           }
-
-          // Tạo tên file duy nhất
-          const fileName = `${fileExtName}`;
+          // const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
+          // const fileName = `${uniqueSuffix}${fileExtName}`;
+          const fileName = 'file.originalname';
           cb(null, fileName);
         },
       }),
@@ -35,6 +32,6 @@ export class FileUploadService {
 
   // Hàm để trả về đường dẫn của file sau khi upload
   getFileUrl(file: Express.Multer.File, destination: string): string {
-    return `${destination}/${file.filename}`;
+    return `${destination}/${file.originalname}`;
   }
 }
