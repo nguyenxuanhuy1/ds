@@ -1,13 +1,18 @@
-import { ApiProperty } from "@nestjs/swagger";
+import { ApiProperty } from '@nestjs/swagger';
+import { IsNotEmpty, IsString } from 'class-validator';
 
 export class CreateBannerDto {
-        
-    @ApiProperty()
-    image: string;
+  @IsString()
+  @IsNotEmpty()
+  @ApiProperty()
+  slug: string;
 
-    @ApiProperty()
-    href: string;
+  @ApiProperty()
+  image: string;
 
-    @ApiProperty({ required: false })
-    openInNewTab?:boolean;
+  @ApiProperty()
+  href: string;
+
+  @ApiProperty({ required: false })
+  openInNewTab?: boolean;
 }
