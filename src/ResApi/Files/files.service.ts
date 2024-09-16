@@ -22,15 +22,13 @@ export class FileUploadService {
           }
           // const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
           // const fileName = `${uniqueSuffix}${fileExtName}`;
-          const fileName = 'file.originalname';
-          cb(null, fileName);
+          // cb(null, fileName);
         },
       }),
-      limits: { fileSize: 5 * 1024 * 1024 }, // Giới hạn file tối đa 5MB
+      limits: { fileSize: 5 * 1024 * 1024 },
     };
   }
 
-  // Hàm để trả về đường dẫn của file sau khi upload
   getFileUrl(file: Express.Multer.File, destination: string): string {
     return `${destination}/${file.originalname}`;
   }
