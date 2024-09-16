@@ -11,6 +11,8 @@ import { BannersService } from './banners.service';
 import { CreateBannerDto } from './dto/create-banner.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
+import { extname } from 'path';
 
 @ApiTags('API-Banners')
 @Controller('banners')
@@ -30,7 +32,6 @@ export class BannersController {
     if (!file) {
       throw new BadRequestException('File không được tải lên');
     }
-
     return this.bannersService.createBanner(file, createBannerDto);
   }
 }

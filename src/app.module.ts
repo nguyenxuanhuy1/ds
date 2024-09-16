@@ -33,6 +33,9 @@ import { Menu } from './ResApi/menu/entities/menu.entity';
 import { MenuModule } from './ResApi/menu/menu.module';
 import { Keyword } from './ResApi/keywords/entities/keyword.entity';
 import { KeywordsModule } from './ResApi/keywords/keywords.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { extname, join } from 'path';
+import { diskStorage } from 'multer';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -67,8 +70,10 @@ import { KeywordsModule } from './ResApi/keywords/keywords.module';
         synchronize: true,
       }),
     }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'public'),
+    }),
     FilesModule,
-    MulterModule.register({ dest: './public/upload' }),
     UserModule,
     ProductsModule,
     CategoriesModule,

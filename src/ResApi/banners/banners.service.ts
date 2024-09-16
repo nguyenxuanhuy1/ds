@@ -19,7 +19,7 @@ export class BannersService {
   ) {
     const imagePath = this.fileUploadService.getFileUrl(
       file,
-      `${process.env.BASEURL}public/upload/banners`,
+      `./public/upload`,
     );
     createBannerDto.image = imagePath;
 
