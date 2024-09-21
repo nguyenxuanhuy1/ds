@@ -19,7 +19,7 @@ export class BannersService {
   ) {
     const imagePath = this.fileUploadService.getFileUrl(
       file,
-      `./public/upload`,
+      `${process.env.BASEURL}public/uploads/banners`,
     );
     createBannerDto.image = imagePath;
 
@@ -48,7 +48,6 @@ export class BannersService {
       }
       return bannerDto;
     });
-
     return { list };
   }
 }
