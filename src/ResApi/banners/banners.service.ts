@@ -4,6 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Banner } from './entities/banner.entity';
 import { Repository } from 'typeorm';
 import { FileUploadService } from '../Files/files.service';
+import { removeVietnameseTones } from 'src/utils/removeVN';
 
 @Injectable()
 export class BannersService {
@@ -26,7 +27,7 @@ export class BannersService {
     if (!createBannerDto.slug) {
       throw new BadRequestException('Slug không được để trống');
     }
-    createBannerDto.href = `${process.env.BASEURL}banners/${createBannerDto.slug}`;
+    createBannerDto.href = `${process.env.BASEURL}banners/${removeVietnameseTones(createBannerDto.slug)}`;
     return this.saveBannerToDatabase(createBannerDto);
   }
 
