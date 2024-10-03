@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { KeywordsService } from './keywords.service';
 import { ApiTags } from '@nestjs/swagger';
 import { CreateKeywordDto } from './dto/create-keyword.dto';
@@ -10,5 +18,9 @@ export class KeywordsController {
   @Get()
   async getMenuList(): Promise<{ list: CreateKeywordDto[] }> {
     return this.keywordsService.getKeywordList();
+  }
+  @Post()
+  async createKeyWords(@Body() createKeywordDto: CreateKeywordDto) {
+    return this.keywordsService.createKeywordList(createKeywordDto);
   }
 }
