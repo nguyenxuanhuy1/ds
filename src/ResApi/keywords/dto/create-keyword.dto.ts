@@ -1,10 +1,8 @@
-import { ApiProperty } from "@nestjs/swagger";
+import { ApiProperty } from '@nestjs/swagger';
+import { IsString } from 'class-validator';
 
 export class CreateKeywordDto {
-    
-    @ApiProperty()
-    text: string;
-
-    @ApiProperty()
-    href: string;
+  @IsString()
+  @ApiProperty()
+  text: string;
 }
