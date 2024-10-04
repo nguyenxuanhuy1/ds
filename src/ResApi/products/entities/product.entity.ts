@@ -42,9 +42,6 @@ export class Product {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  // @OneToMany(() => Review, (review) => review.product)
-  // reviews: Review[];
-
   @OneToMany(() => OrderItem, (orderItem) => orderItem.product)
   orderItems: OrderItem[];
 

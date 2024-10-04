@@ -36,12 +36,12 @@ export class FilesModule {
             },
           }),
           fileFilter: (req, file, callback) => {
-            if (file.mimetype.match(/\/(jpg|jpeg|png)$/)) {
+            if (file.mimetype.match(/\/(jpg|jpeg|png|gif)$/)) {
               callback(null, true);
             } else {
               callback(
                 new BadRequestException(
-                  'Chỉ chấp nhận định dạng (jpg, jpeg, png, gif)',
+                  'Chỉ chấp nhận định dạng (jpg, jpeg, png, svg)',
                 ),
                 false,
               );

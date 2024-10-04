@@ -1,12 +1,10 @@
-import { BadRequestException, Module } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { BannersService } from './banners.service';
 import { BannersController } from './banners.controller';
 import { Banner } from './entities/banner.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { FilesModule } from '../Files/files.module';
 import { MulterModule } from '@nestjs/platform-express';
-import { diskStorage } from 'multer';
-import { extname } from 'path';
 
 @Module({
   imports: [

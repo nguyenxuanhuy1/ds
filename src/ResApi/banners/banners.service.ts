@@ -23,14 +23,9 @@ export class BannersService {
       `${process.env.BASEURL}public/uploads/banners`,
     );
     createBannerDto.image = imagePath;
-
-    if (!createBannerDto.slug) {
-      throw new BadRequestException('Slug không được để trống');
-    }
     createBannerDto.href = `${process.env.BASEURL}banners/${removeVietnameseTones(createBannerDto.slug)}`;
     return this.saveBannerToDatabase(createBannerDto);
   }
-
   private async saveBannerToDatabase(createBannerDto: CreateBannerDto) {
     return this.Repository.save(createBannerDto);
   }
@@ -40,7 +35,6 @@ export class BannersService {
     const bannerEntities = await this.Repository.find();
     const list: CreateBannerDto[] = bannerEntities.map((banner) => {
       const bannerDto: CreateBannerDto = {
-        slug: banner.slug,
         image: banner.image,
         href: banner.href,
       };

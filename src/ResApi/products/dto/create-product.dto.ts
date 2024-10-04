@@ -20,5 +20,9 @@ export class CreateProductDto {
 
   @ApiProperty()
   @IsString()
+  originalPrice: number;
+
+  @ApiProperty()
+  @IsString()
   platform: string;
 }
