@@ -34,8 +34,7 @@ import { MenuModule } from './ResApi/menu/menu.module';
 import { Keyword } from './ResApi/keywords/entities/keyword.entity';
 import { KeywordsModule } from './ResApi/keywords/keywords.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
-import { extname, join } from 'path';
-import { diskStorage } from 'multer';
+import { join } from 'path';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -70,9 +69,9 @@ import { diskStorage } from 'multer';
         synchronize: true,
       }),
     }),
-    ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', 'public'),
-    }),
+    // ServeStaticModule.forRoot({
+    //   rootPath: join(__dirname, '..', 'public'),
+    // }),
     FilesModule,
     UserModule,
     ProductsModule,
@@ -89,7 +88,5 @@ import { diskStorage } from 'multer';
     MenuModule,
     KeywordsModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule {}

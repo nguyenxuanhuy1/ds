@@ -6,6 +6,7 @@ import {
   UseInterceptors,
   BadRequestException,
   UploadedFile,
+  NotFoundException,
 } from '@nestjs/common';
 import { BannersService } from './banners.service';
 import { CreateBannerDto } from './dto/create-banner.dto';
