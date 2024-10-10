@@ -15,7 +15,6 @@ async function bootstrap() {
       transform: true,
     }),
   );
-
   const config = new DocumentBuilder()
     .setTitle('DS')
     .setDescription('API description')

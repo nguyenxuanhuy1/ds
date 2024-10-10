@@ -1,13 +1,16 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Slide {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column()
-    image: string;
+  @Column()
+  image: string;
 
-    @Column()
-    href: string;
+  @Column()
+  href: string;
+
+  @Column()
+  slug: string;
 }

@@ -4,7 +4,18 @@ import { IsDateString, IsNumber, IsString } from 'class-validator';
 export class CreateProductDto {
   @ApiProperty()
   @IsString()
-  productName: string;
+  slug: string;
+
+  // @ApiProperty()
+  // @IsString()
+  // slugType: string;
+
+  @ApiProperty()
+  @IsString()
+  name: string;
+
+  @ApiProperty()
+  image: string;
 
   @ApiProperty()
   @IsString()
@@ -15,10 +26,6 @@ export class CreateProductDto {
   price: number;
 
   @ApiProperty()
-  @IsString()
-  imageUrl: string;
-
-  @ApiProperty()
-  @IsString()
-  platform: string;
+  @IsNumber()
+  originalPrice: number;
 }

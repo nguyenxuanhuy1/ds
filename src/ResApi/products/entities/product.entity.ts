@@ -6,6 +6,7 @@ import {
   OneToMany,
   CreateDateColumn,
   UpdateDateColumn,
+  Index,
 } from 'typeorm';
 import { Category } from '../../categories/entities/category.entity';
 // import { Review } from './review.entity';
@@ -16,10 +17,20 @@ import { CartItem } from 'src/ResApi/cart-item/entities/cart-item.entity';
 @Entity()
 export class Product {
   @PrimaryGeneratedColumn()
-  productId: number;
+  id: number;
 
   @Column()
-  productName: string;
+  slug: string;
+
+  @Index()
+  @Column()
+  slugType: string;
+
+  @Column()
+  name: string;
+
+  @Column()
+  image: string;
 
   @Column('text')
   description: string;
@@ -27,23 +38,14 @@ export class Product {
   @Column('decimal', { precision: 10, scale: 2 })
   price: number;
 
-  @ManyToOne(() => Category, (category) => category.products)
-  category: Category;
-
-  @Column()
-  imageUrl: string;
-
-  @Column()
-  platform: string;
+  @Column('decimal', { precision: 10, scale: 2 })
+  originalPrice: number;
 
   @CreateDateColumn()
   createdAt: Date;
 
   @UpdateDateColumn()
   updatedAt: Date;
-
-  // @OneToMany(() => Review, (review) => review.product)
-  // reviews: Review[];
 
   @OneToMany(() => OrderItem, (orderItem) => orderItem.product)
   orderItems: OrderItem[];
@@ -53,4 +55,7 @@ export class Product {
 
   @OneToMany(() => CartItem, (cartItem) => cartItem.product)
   cartItems: CartItem[];
+
+  @ManyToOne(() => Category, (category) => category.products)
+  category: Category;
 }
