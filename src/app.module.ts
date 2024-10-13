@@ -35,6 +35,7 @@ import { Keyword } from './ResApi/keywords/entities/keyword.entity';
 import { KeywordsModule } from './ResApi/keywords/keywords.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { FileModule } from './ResApi/file/file.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -87,6 +88,7 @@ import { join } from 'path';
     NewsModule,
     MenuModule,
     KeywordsModule,
+    FileModule,
   ],
 })
 export class AppModule {}

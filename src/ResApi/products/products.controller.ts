@@ -20,7 +20,6 @@ export class ProductsController {
   // async getMenuList(): Promise<{ list: CreateProductDto[] }> {
   //   return this.productsService.getProductList();
   // }
-
   @Post()
   @UseInterceptors(FileInterceptor('file'))
   async createBanner(

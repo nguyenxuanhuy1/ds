@@ -5,7 +5,10 @@ import { Product } from '../../products/entities/product.entity';
 @Entity()
 export class OrderItem {
   @PrimaryGeneratedColumn()
-  orderItemId: number;
+  id: number;
+
+  @Column()
+  slug: string;
 
   @ManyToOne(() => Order, (order) => order.orderItems)
   order: Order;

@@ -26,6 +26,7 @@ export class Product {
   @Column()
   slugType: string;
 
+  @Index()
   @Column()
   name: string;
 
