@@ -31,15 +31,8 @@ export class BannersController {
   }
 
   @Post()
-  @UseInterceptors(FileInterceptor('file'))
-  async createBanner(
-    @UploadedFile() file: Express.Multer.File,
-    @Body() createBannerDto: CreateBannerDto,
-  ) {
-    if (!file) {
-      throw new BadRequestException('File không được tải lên');
-    }
-    return this.bannersService.createBanner(file, createBannerDto);
+  async createBanner(@Body() body: CreateBannerDto) {
+    return this.bannersService.createBanner(body);
   }
 
   @Post('delete/:id')

@@ -11,7 +11,7 @@ export class CreateBannerDto {
   @ApiProperty()
   slug?: string;
 
-  @ApiProperty()
+  @IsNotEmpty({ message: 'Loại sản phẩm không được để trống-[Slug]' })
   image: string;
 
   @ApiProperty()
