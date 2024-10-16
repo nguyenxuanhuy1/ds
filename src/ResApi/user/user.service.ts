@@ -22,7 +22,7 @@ export class UserService {
 
     const checktrung = await this.findOneByUsername(username);
     if (checktrung) {
-      throw new BadRequestException('Tài khoản đã tồn tại');
+      throw new BadRequestException(['Đã tồn tại tài khoản trên hệ thống']);
     }
     // Băm mật khẩu
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -43,7 +43,7 @@ export class UserService {
     const user = await this.validateUser(username, password);
 
     if (!user) {
-      throw new BadRequestException('Tài khoản hoặc mật khẩu sai');
+      throw new BadRequestException(['Tài khoản hoặc mật khẩu khồng đúng']);
     }
     const accessToken = await this.jwtService.signAsync(
       { userId: user.userId },
